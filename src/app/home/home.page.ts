@@ -17,11 +17,8 @@ export class HomePage {
   ) {}
  
   ngOnInit(){
-    
     if(this.authService.userDetails()){
       this.userEmail = this.authService.userDetails().email;
-    }else{
-      this.navCtrl.navigateBack('');
     }
   }
  
@@ -29,7 +26,7 @@ export class HomePage {
     this.authService.logoutUser()
     .then(res => {
       console.log(res);
-      this.navCtrl.navigateBack('');
+      this.navCtrl.navigateRoot(['/login']);
     })
     .catch(error => {
       console.log(error);

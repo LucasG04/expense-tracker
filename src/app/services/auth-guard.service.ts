@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthenticateService } from './authentication.service';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,16 @@ import { AuthenticateService } from './authentication.service';
 export class AuthGuardService {
 
   constructor(
-    public authenticationService: AuthenticateService
+    public authenticationService: AuthenticateService,
+    private navCtrl: NavController,
       ) {}
 
   canActivate(): boolean {
-    return this.authenticationService.isAuthenticated;
+    if (!this.authenticationService.isAuthenticated) {
+      this.navCtrl.navigateRoot(['/login']);
+      return false;
+    } else {
+      return true;
+    }
   }
 }
