@@ -1,5 +1,14 @@
-.login-form {
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap&text=ExpensTrackr');
 
+.header {
+    width: fit-content;
+    margin: 25% auto;
+    text-align: center;
+}
+
+#app-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
 }
 
 .submit-btn {

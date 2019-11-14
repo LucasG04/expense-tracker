@@ -1,8 +1,10 @@
 <ion-content padding>
 
   <div class="header">
-    <img>
-    <h1>Expense Tracker</h1>
+    <img src="../../assets/icon/favicon.png">
+    <ion-text>
+      <h1 id="app-title">Expense Tracker</h1>
+    </ion-text>
   </div>
 
   <form class="login-form" [formGroup]="validations_form"  (ngSubmit)="loginUser(validations_form.value)">
