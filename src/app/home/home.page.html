@@ -3,13 +3,28 @@
     <ion-title>
       Dashboard
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    Hier entsteht ein Dashboard
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        Hier entsteht ein Dashboard
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        Your Registered EmailID : {{userEmail}}
+      </ion-col>
+    </ion-row>
+  </ion-grid> 
+
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
