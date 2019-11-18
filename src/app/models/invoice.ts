@@ -3,8 +3,8 @@ export class Invoice {
     title: string;
     costs: number;
     category: string;
-    date: Date;
+    date: string;
     note: string;
-    biller: firebase.User;
+    billerid: string;
 
 }

@@ -17,6 +17,7 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 
 import * as firebase from 'firebase';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
 
 firebase.initializeApp(environment.firebase);
 
@@ -27,6 +28,7 @@ firebase.initializeApp(environment.firebase);
     BrowserModule, 
     ReactiveFormsModule, 
     IonicModule.forRoot(), 
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AppRoutingModule, 
@@ -38,7 +40,6 @@ firebase.initializeApp(environment.firebase);
     AuthGuardService,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

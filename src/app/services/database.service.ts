@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Invoice } from '../models/invoice';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { AuthenticateService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +12,18 @@ export class DatabaseService {
   private invoices: Observable<Invoice[]>;
   private invoiceCollection: AngularFirestoreCollection<Invoice>;
  
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private authService: AuthenticateService) {
     this.invoiceCollection = this.afs.collection<Invoice>('invoices');
     this.invoices = this.getInvoices();
   }
  
   getInvoices(): Observable<Invoice[]> {
-    return this.invoiceCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
+    return this.invoiceCollection.get().pipe(
+      map(snapshot => {
+        return snapshot.docs.filter(doc => doc.data().billerid == this.authService.userDetails().uid).map(doc => {
+          const invoice = doc.data();
+          invoice.id = doc.id;
+          return invoice as Invoice;
         });
       })
     );
@@ -32,15 +33,18 @@ export class DatabaseService {
     return this.invoiceCollection.doc<Invoice>(id).valueChanges();
   }
  
-  addInvoice(invoice: Invoice): Promise<DocumentReference> {
-    return this.invoiceCollection.add(invoice);
+  addInvoice(invoice: Invoice): Observable<DocumentReference> {
+    const promise = this.invoiceCollection.add(invoice);
+    return from(promise);
   }
  
-  updateInvoice(invoice: Invoice): Promise<void> {
-    return this.invoiceCollection.doc(invoice.id).update(invoice);
+  updateInvoice(invoice: Invoice): Observable<void> {
+    const promise = this.invoiceCollection.doc(invoice.id).update(invoice);
+    return from(promise);
   }
  
-  deleteInvoice(id: string): Promise<void> {
-    return this.invoiceCollection.doc(id).delete();
+  deleteInvoice(id: string): Observable<void> {
+    const promise = this.invoiceCollection.doc(id).delete();
+    return from(promise);
   }
 }

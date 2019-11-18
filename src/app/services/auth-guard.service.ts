@@ -13,12 +13,11 @@ export class AuthGuardService {
       ) {}
 
   canActivate(): boolean {
-    // if (!this.authenticationService.isAuthenticated) {
-    //   this.navCtrl.navigateRoot(['/login']);
-    //   return false;
-    // } else {
-    //   return true;
-    // }
-    return true;
+    if (!this.authenticationService.isAuthenticated) {
+      this.navCtrl.navigateRoot(['/login']);
+      return false;
+    } else {
+      return true;
+    }
   }
 }
