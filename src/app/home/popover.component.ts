@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, NavController, PopoverController } from '@ionic/angular';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
     selector: 'selector-name',
@@ -24,17 +25,27 @@ export class PopoverComponent implements OnInit {
 
     invoice;
 
-    constructor(private navParams: NavParams) { }
+    constructor(
+        private navParams: NavParams,
+        private navCtrl: NavController,
+        private popoverCtrl: PopoverController,
+        private dataService: DatabaseService) { }
 
     ngOnInit() {
         this.invoice = this.navParams.data.invoice;
     }
 
     editInvoice() {
-
+        this.navCtrl.navigateForward(['/edit-invoice'], { animated: true, state: this.invoice });
+        this.dismissPopover();
     }
 
     deleteInvoice() {
+        this.dataService.deleteInvoice(this.invoice.id);
+        this.dismissPopover();
+    }
 
+    async dismissPopover() {
+        await this.popoverCtrl.dismiss();
     }
 }
