@@ -11,16 +11,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!-- <ion-content *ngIf="invoices"> -->
+  <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col text-center>
-        Hier entsteht ein Dashboard
+      <ion-col>
+        <h2 class="section-title">Auswertung</h2>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col text-center>
+      <ion-col class="ion-text-center">
         Your Registered EmailID : {{userEmail}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2 class="section-title">Historie</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-list>
+          <ion-item *ngFor="let invoice of data">
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">{{invoice.title}}</h2>
+              </ion-text>
+              <p>{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs}}€</p>
+            </ion-label>
+            <ion-button slot="end" fill="clear" color="dark" shape="round" (click)="presentPopoverForInvoice(invoice)">
+              <ion-icon slot="icon-only" name="more"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid> 
