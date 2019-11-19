@@ -37,7 +37,8 @@ export class DatabaseService {
     return this.invoiceCollection.doc<Invoice>(id).valueChanges();
   }
  
-  addInvoice(invoice: Invoice): Observable<DocumentReference> {
+  createInvoice(invoice: Invoice): Observable<DocumentReference> {
+    invoice.billerid = this.authService.userDetails().uid;
     const promise = this.invoiceCollection.add(invoice).finally(() => this.fetchInvoices());
     return from(promise);
   }

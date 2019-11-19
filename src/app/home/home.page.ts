@@ -60,4 +60,8 @@ export class HomePage {
     return await popvoer.present();
   }
 
+  navigateToAddInvoice() {
+    this.navCtrl.navigateForward(['/create-invoice'], { animated: true });
+  }
+
 }

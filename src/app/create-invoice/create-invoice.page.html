@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>create-invoice</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form class="create-form" [formGroup]="validations_form"  (ngSubmit)="createInvoice(validations_form.value)">
+      
+      <ion-item>
+        <ion-label position="floating" color="primary">Titel</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.title">
+          <div class="error-message" *ngIf="validations_form.get('title').hasError(validation.type) && (validations_form.get('title').dirty || validations_form.get('title').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+   
+      <ion-item>
+        <ion-label position="floating" color="primary">Costs</ion-label>
+        <ion-input type="number" formControlName="costs" class="form-controll" required></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.costs">
+          <div class="error-message" *ngIf="validations_form.get('costs').hasError(validation.type) && (validations_form.get('costs').dirty || validations_form.get('costs').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+  
+      <ion-item>
+        <ion-label color="primary">Category</ion-label>
+        <ion-select interface="popover" formControlName="category" required>
+          <ion-select-option *ngFor="let category of categories" value="{{category}}">{{category.charAt(0).toUpperCase()}}{{category.slice(1)}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.category">
+          <div class="error-message" *ngIf="validations_form.get('category').hasError(validation.type) && (validations_form.get('category').dirty || validations_form.get('category').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+  
+      <ion-item>
+        <ion-label>Rechnungsdatum</ion-label>
+        <ion-datetime displayFormat="DD.MM.YYYY" placeholder="Datum auswählen"  formControlName="date" required></ion-datetime>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating" color="primary">Notiz</ion-label>
+        <ion-textarea formControlName="note" class="form-controll"></ion-textarea>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.note">
+          <div class="error-message" *ngIf="validations_form.get('note').hasError(validation.type) && (validations_form.get('note').dirty || validations_form.get('note').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+  
+      <div class="error-message">
+          <ion-label color="danger">{{errorMessage}}</ion-label>
+      </div>
+      
+      <ion-button class="submit-btn" type="submit" size="large" expand="full" [disabled]="!validations_form.valid">Erstellen</ion-button>
+    </form>
+</ion-content>
