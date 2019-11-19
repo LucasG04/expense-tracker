@@ -13,7 +13,7 @@ import { DatabaseService } from '../services/database.service';
                 <ion-icon name="create" slot="start"></ion-icon>
                 <ion-label>Bearbeiten</ion-label>
             </ion-item>
-            <ion-item (click)="deleteInvoice()" detail>
+            <ion-item (click)="deleteInvoice()">
                 <ion-icon name="trash" slot="start"></ion-icon>
                 <ion-label>Löschen</ion-label>
             </ion-item>

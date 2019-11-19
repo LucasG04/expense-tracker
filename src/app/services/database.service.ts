@@ -9,19 +9,36 @@ import { AuthenticateService } from './authentication.service';
   providedIn: 'root'
 })
 export class DatabaseService {
-  public invoices: BehaviorSubject<Invoice[]> = new BehaviorSubject([]);
   private invoiceCollection: AngularFirestoreCollection<Invoice>;
+  private generalCollection: AngularFirestoreCollection<Invoice>;
+
+  private _invoices: BehaviorSubject<Invoice[]> = new BehaviorSubject([]);
+  private _categories: String[];
  
   constructor(private afs: AngularFirestore, private authService: AuthenticateService) {
     this.invoiceCollection = this.afs.collection<Invoice>('invoices');
+    this.generalCollection = this.afs.collection<Invoice>('general');
     this.fetchInvoices();
+    this.fetchCategories();
   }
 
   private async fetchInvoices() {
-    this.invoices.next(await this.getInvoices())
+    this._invoices.next(await this.getInvoices())
+  }
+
+  private async fetchCategories() {
+    this._categories = await this.getCategories();
+  }
+
+  get invoices(): BehaviorSubject<Invoice[]> {
+    return this._invoices;
+  }
+
+  get categories(): String[] {
+    return this._categories;
   }
  
-  getInvoices(): Promise<Invoice[]> {
+  private getInvoices(): Promise<Invoice[]> {
     return this.invoiceCollection.get().pipe(
       map(snapshot => {
         return snapshot.docs.filter(doc => doc.data().billerid == this.authService.userDetails().uid).map(doc => {
@@ -51,5 +68,13 @@ export class DatabaseService {
   deleteInvoice(id: string): Observable<void> {
     const promise = this.invoiceCollection.doc(id).delete().finally(() => this.fetchInvoices());
     return from(promise);
+  }
+
+  getCategories(): Promise<String[]> {
+    return this.generalCollection.doc('categories').get().pipe(
+      map(snapshot => {
+        return snapshot.data().categories;
+      })
+    ).toPromise();
   }
 }

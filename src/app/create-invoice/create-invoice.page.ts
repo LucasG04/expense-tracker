@@ -14,7 +14,7 @@ export class CreateInvoicePage implements OnInit {
   validations_form: FormGroup;
   errorMessage: string = '';
   validation_messages = validation_messages;
-  categories = categories;
+  categories = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,6 +23,8 @@ export class CreateInvoicePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.categories = this.dataService.categories;
+
     this.validations_form = this.formBuilder.group({
       title: new FormControl('', Validators.compose([
         Validators.required,
@@ -53,8 +55,6 @@ export class CreateInvoicePage implements OnInit {
   }
 
 }
-
-const categories = ['training','installation'];
 
 const validation_messages = {
   'title': [

@@ -17,7 +17,7 @@ export class EditInvoicePage implements OnInit {
   validations_form: FormGroup;
   errorMessage: string = '';
   validation_messages = validation_messages;
-  categories = categories;
+  categories = [];
 
   constructor(
     private router: Router,
@@ -27,6 +27,7 @@ export class EditInvoicePage implements OnInit {
 
   ngOnInit() {
     this.invoice = this.router.getCurrentNavigation().extras.state;
+    this.categories = this.dataService.categories;
     
     this.validations_form = this.formBuilder.group({
       id: new FormControl(this.invoice.id),
@@ -65,8 +66,6 @@ export class EditInvoicePage implements OnInit {
   }
 
 }
-
-const categories = ['training','installation'];
 
 const validation_messages = {
   'title': [
