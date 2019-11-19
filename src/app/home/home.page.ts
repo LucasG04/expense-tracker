@@ -32,7 +32,16 @@ export class HomePage {
 
   initializeHome() {
     this.userEmail = this.authService.userDetails().uid;
-    this.dataService.invoices.subscribe((invoices) => this.invoices = invoices);
+    this.dataService.invoices.subscribe((invoices) => {
+      this.invoices = invoices;
+      this.sortInvoicesByDate();
+    });
+  }
+
+  sortInvoicesByDate() {
+    if (this.invoices) {
+      this.invoices = this.invoices.sort((a,b) => +b.date - +a.date);
+    }
   }
 
   logout() {
