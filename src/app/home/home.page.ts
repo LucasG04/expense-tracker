@@ -15,12 +15,6 @@ export class HomePage {
   userEmail: string;
   invoices: Invoice[];
 
-  data = [
-    {title: 'Hotel', date: '1574062095168', costs: 76},
-    {title: 'Mietwagen', date: '1574062095768', costs: 41},
-    {title: 'Dinner', date: '1574062015168', costs: 121},
-  ]
-
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticateService,
@@ -36,12 +30,9 @@ export class HomePage {
     }
   }
 
-  async initializeHome() {
+  initializeHome() {
     this.userEmail = this.authService.userDetails().uid;
-    this.dataService.getInvoices().subscribe(invoices => {
-      console.log(invoices)
-      this.invoices = invoices;
-    });
+    this.dataService.invoices.subscribe((invoices) => this.invoices = invoices);
   }
 
   logout() {
