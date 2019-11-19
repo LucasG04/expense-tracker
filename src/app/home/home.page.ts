@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticateService } from '../services/authentication.service';
 import { NavController, PopoverController } from '@ionic/angular';
 import { Invoice } from '../models/invoice';
 import { DatabaseService } from '../services/database.service';
 import { PopoverComponent } from './popover.component';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { PopoverComponent } from './popover.component';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  pieChart: Chart;
 
   userEmail: string;
   invoices: Invoice[];
@@ -22,6 +24,7 @@ export class HomePage {
     private popoverCtrl: PopoverController
   ) { }
 
+  @ViewChild('pieCanvas', {static: false}) pieCanvas: ElementRef;
   ngOnInit() {
     if (this.authService.isAuthenticated) {
       this.initializeHome();
@@ -35,6 +38,7 @@ export class HomePage {
     this.dataService.invoices.subscribe((invoices) => {
       this.invoices = invoices;
       this.sortInvoicesByDate();
+      setTimeout(() => this.createPieChart());
     });
   }
 
@@ -71,6 +75,45 @@ export class HomePage {
 
   navigateToAddInvoice() {
     this.navCtrl.navigateForward(['/create-invoice'], { animated: true });
+  }
+
+  createPieChart() {
+    if (this.dataService.categories) {
+      this.pieChart = new Chart(this.pieCanvas.nativeElement, {
+        type: "pie",
+        data: {
+          labels: this.dataService.categories,
+          datasets: [
+            {
+              label: "# der Rechnungen",
+              data: this.getNumberOfInvoicesInCategories(),
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.8)",
+                "rgba(54, 162, 235, 0.8)",
+                // "rgba(255, 206, 86, 0.2)",
+                // "rgba(75, 192, 192, 0.2)",
+                // "rgba(153, 102, 255, 0.2)",
+                // "rgba(255, 159, 64, 0.2)"
+              ],
+              hoverBackgroundColor: ["#FF6384", "#36A2EB", /*"#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"*/]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        }
+      });
+    }
+  }
+
+  private getNumberOfInvoicesInCategories(): number[] {
+    let result = [];
+    this.dataService.categories.forEach(category => {
+      const count = this.invoices.filter(invoice => invoice.category === category).length;
+      result.push(count);
+    });
+    return result;
   }
 
 }

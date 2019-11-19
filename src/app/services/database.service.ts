@@ -16,10 +16,10 @@ export class DatabaseService {
   private _categories: String[];
  
   constructor(private afs: AngularFirestore, private authService: AuthenticateService) {
-    this.invoiceCollection = this.afs.collection<Invoice>('invoices');
     this.generalCollection = this.afs.collection<Invoice>('general');
-    this.fetchInvoices();
+    this.invoiceCollection = this.afs.collection<Invoice>('invoices');
     this.fetchCategories();
+    this.fetchInvoices();
   }
 
   private async fetchInvoices() {
