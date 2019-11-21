@@ -67,12 +67,12 @@ export class HomePage {
     return new Date(+ms).toLocaleDateString();
   }
 
-  async presentPopoverForInvoice(invoice) {
+  async presentPopoverForInvoice(invoice, event) {
     const popvoer = await this.popoverCtrl.create({
       component: PopoverComponent,
       componentProps: { invoice },
+      event,
       animated: true,
-      showBackdrop: true
     });
     return await popvoer.present();
   }

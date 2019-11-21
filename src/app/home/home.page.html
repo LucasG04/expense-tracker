@@ -33,7 +33,7 @@
               </ion-text>
               <p class="list-item-text">{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs}}€</p>
             </ion-label>
-            <ion-button slot="end" fill="clear" color="dark" shape="round" (click)="presentPopoverForInvoice(invoice)">
+            <ion-button slot="end" fill="clear" color="dark" shape="round" (click)="presentPopoverForInvoice(invoice, $event)">
               <ion-icon slot="icon-only" name="more"></ion-icon>
             </ion-button>
           </ion-item>
