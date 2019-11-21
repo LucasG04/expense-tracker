@@ -12,7 +12,7 @@ import { NavController } from '@ionic/angular';
 })
 export class EditInvoicePage implements OnInit {
 
-  invoice;
+  invoice: Invoice;
 
   validations_form: FormGroup;
   errorMessage: string = '';
@@ -26,7 +26,7 @@ export class EditInvoicePage implements OnInit {
     private dataService: DatabaseService) { }
 
   ngOnInit() {
-    this.invoice = this.router.getCurrentNavigation().extras.state;
+    this.invoice = this.router.getCurrentNavigation().extras.state as Invoice;
     this.categories = this.dataService.categories;
     
     this.validations_form = this.formBuilder.group({
