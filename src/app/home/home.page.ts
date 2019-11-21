@@ -85,7 +85,7 @@ export class HomePage {
   createPieChart() {
     if (this.dataService.categories) {
       this.pieChart = new Chart(this.pieCanvas.nativeElement, {
-        type: "pie",
+        type: "doughnut",
         data: {
           labels: this.dataService.categories.map(category => {
             return category.charAt(0).toUpperCase() + category.slice(1);
