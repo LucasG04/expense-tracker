@@ -94,14 +94,19 @@ export class HomePage {
               label: "# der Rechnungen",
               data: this.getNumberOfInvoicesInCategories(),
               backgroundColor: [
-                "rgba(255, 99, 132, 0.8)",
-                "rgba(54, 162, 235, 0.8)",
-                // "rgba(255, 206, 86, 0.2)",
-                // "rgba(75, 192, 192, 0.2)",
-                // "rgba(153, 102, 255, 0.2)",
-                // "rgba(255, 159, 64, 0.2)"
+                "rgba(40, 45, 76, 0.8)",
+                "rgba(224, 240, 230, 0.8)",
+                "rgba(33, 206, 189, 0.8)",
+                "rgba(219, 59, 104, 0.8)",
+                "rgba(255, 188, 56, 0.8)",
               ],
-              hoverBackgroundColor: ["#FF6384", "#36A2EB", /*"#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"*/]
+              hoverBackgroundColor: [
+                "rgb(40, 45, 76)",
+                "rgb(224, 240, 230)",
+                "rgb(33, 206, 189)",
+                "rgb(219, 59, 104)",
+                "rgb(255, 188, 56)",
+              ],
             }
           ]
         },
@@ -110,6 +115,11 @@ export class HomePage {
           maintainAspectRatio: false,
           legend: {
             position: 'bottom',
+          },
+          elements: {
+            arc: {
+              borderWidth: 0
+            }
           }
         }
       });
@@ -122,6 +132,7 @@ export class HomePage {
       const count = this.invoices.filter(invoice => invoice.category === category).length;
       result.push(count);
     });
+    console.log(result)
     return result;
   }
 
