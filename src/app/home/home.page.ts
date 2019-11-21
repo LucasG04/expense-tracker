@@ -5,6 +5,7 @@ import { Invoice } from '../models/invoice';
 import { DatabaseService } from '../services/database.service';
 import { PopoverComponent } from './popover.component';
 import { Chart } from 'chart.js';
+import { CATEGORYICONS } from '../entities/category-icons';
 
 @Component({
   selector: 'app-home',
@@ -132,8 +133,11 @@ export class HomePage {
       const count = this.invoices.filter(invoice => invoice.category === category).length;
       result.push(count);
     });
-    console.log(result)
     return result;
+  }
+
+  private getCategoryIconName(category: string): string {
+    return CATEGORYICONS.find(element => element.category == category).icon;
   }
 
 }
