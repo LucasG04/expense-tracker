@@ -17,6 +17,8 @@ export class HomePage {
   userEmail: string;
   invoices: Invoice[];
 
+  simulatedLoading = true;
+
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticateService,
@@ -24,7 +26,7 @@ export class HomePage {
     private popoverCtrl: PopoverController
   ) { }
 
-  @ViewChild('pieCanvas', {static: false}) pieCanvas: ElementRef;
+  @ViewChild('pieCanvas', { static: false }) pieCanvas: ElementRef;
   ngOnInit() {
     if (this.authService.isAuthenticated) {
       this.initializeHome();
@@ -39,12 +41,16 @@ export class HomePage {
       this.invoices = invoices;
       this.sortInvoicesByDate();
       setTimeout(() => this.createPieChart());
+      setTimeout(() => {
+        if (this.invoices)
+          this.simulatedLoading = false;
+      }, 2000);
     });
   }
 
   sortInvoicesByDate() {
     if (this.invoices) {
-      this.invoices = this.invoices.sort((a,b) => +b.date - +a.date);
+      this.invoices = this.invoices.sort((a, b) => +b.date - +a.date);
     }
   }
 
@@ -66,7 +72,7 @@ export class HomePage {
   async presentPopoverForInvoice(invoice) {
     const popvoer = await this.popoverCtrl.create({
       component: PopoverComponent,
-      componentProps: {invoice},
+      componentProps: { invoice },
       animated: true,
       showBackdrop: true
     });
@@ -82,7 +88,9 @@ export class HomePage {
       this.pieChart = new Chart(this.pieCanvas.nativeElement, {
         type: "pie",
         data: {
-          labels: this.dataService.categories,
+          labels: this.dataService.categories.map(category => {
+            return category.charAt(0).toUpperCase() + category.slice(1);
+          }),
           datasets: [
             {
               label: "# der Rechnungen",
@@ -102,6 +110,9 @@ export class HomePage {
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          legend: {
+            position: 'bottom',
+          }
         }
       });
     }

@@ -1,12 +1,17 @@
 .section-title {
-    margin: 18px 0 0 15px;
-    font-weight: lighter;
+    margin: 20px 0 0 15px;
+    font-weight: bolder;
 }
 
 canvas {
     height: 250px !important;
+    margin-top: 10px;
 }
 
 .list-item-title {
     font-size: larger;
+}
+
+.list-item-text {
+    font-size: large;
 }

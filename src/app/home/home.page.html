@@ -11,14 +11,8 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-content *ngIf="invoices"> -->
-  <ion-content>
+<ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h2 class="section-title">Auswertung</h2>
-      </ion-col>
-    </ion-row>
     <ion-row>
       <ion-col class="ion-text-center">
         <canvas #pieCanvas></canvas>
@@ -30,14 +24,14 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col class="ion-text-center">
+      <ion-col class="ion-text-center" *ngIf="!simulatedLoading">
         <ion-list>
           <ion-item *ngFor="let invoice of invoices">
             <ion-label>
               <ion-text color="primary">
                 <h2 class="list-item-title">{{invoice.title}}</h2>
               </ion-text>
-              <p>{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs}}€</p>
+              <p class="list-item-text">{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs}}€</p>
             </ion-label>
             <ion-button slot="end" fill="clear" color="dark" shape="round" (click)="presentPopoverForInvoice(invoice)">
               <ion-icon slot="icon-only" name="more"></ion-icon>
@@ -45,8 +39,52 @@
           </ion-item>
         </ion-list>
       </ion-col>
+      <!-- Skeleton List -->
+      <ion-col class="ion-text-center" *ngIf="simulatedLoading">
+        <ion-list>
+          <ion-item>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <p style="display: flex;">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <p style="display: flex;">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <p style="display: flex;">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <!-- Skeleton List -->
     </ion-row>
-  </ion-grid> 
+  </ion-grid>
+
+  
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button>
