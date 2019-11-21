@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { PopoverComponent } from './popover.component';
+import { GermanCostsPipe } from './german-costs/german-costs.pipe';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { PopoverComponent } from './popover.component';
       }
     ])
   ],
-  declarations: [HomePage, PopoverComponent],
+  declarations: [HomePage, PopoverComponent, GermanCostsPipe],
   entryComponents: [PopoverComponent]
 })
 export class HomePageModule {}

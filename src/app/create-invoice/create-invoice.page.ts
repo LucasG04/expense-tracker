@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Invoice } from '../models/invoice';
 import { NavController } from '@ionic/angular';
-import { DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../services/database/database.service';
 
 @Component({
   selector: 'app-create-invoice',

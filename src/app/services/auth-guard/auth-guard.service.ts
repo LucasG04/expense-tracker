@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthenticateService } from './authentication.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 import { NavController } from '@ionic/angular';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { NavController } from '@ionic/angular';
 export class AuthGuardService {
 
   constructor(
-    public authenticationService: AuthenticateService,
+    public authenticationService: AuthenticationService,
     private navCtrl: NavController,
       ) {}
 

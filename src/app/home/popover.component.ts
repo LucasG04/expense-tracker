@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, NavController, PopoverController } from '@ionic/angular';
-import { DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../services/database/database.service';
 
 @Component({
     selector: 'selector-name',

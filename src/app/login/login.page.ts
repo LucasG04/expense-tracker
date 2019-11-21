@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { AuthenticateService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
  
   constructor(
     private navCtrl: NavController,
-    private authService: AuthenticateService,
+    private authService: AuthenticationService,
     private formBuilder: FormBuilder
   ) { }
  

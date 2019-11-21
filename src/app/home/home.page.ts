@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { AuthenticateService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 import { NavController, PopoverController } from '@ionic/angular';
 import { Invoice } from '../models/invoice';
-import { DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../services/database/database.service';
 import { PopoverComponent } from './popover.component';
 import { Chart } from 'chart.js';
 import { CATEGORYICONS } from '../entities/category-icons';
@@ -22,7 +22,7 @@ export class HomePage {
 
   constructor(
     private navCtrl: NavController,
-    private authService: AuthenticateService,
+    private authService: AuthenticationService,
     private dataService: DatabaseService,
     private popoverCtrl: PopoverController
   ) { }

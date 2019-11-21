@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../services/database/database.service';
 import { Invoice } from '../models/invoice';
 import { NavController } from '@ionic/angular';
 

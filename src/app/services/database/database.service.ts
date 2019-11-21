@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
-import { Invoice } from '../models/invoice';
+import { Invoice } from '../../models/invoice';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
-import { AuthenticateService } from './authentication.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class DatabaseService {
   private _invoices: BehaviorSubject<Invoice[]> = new BehaviorSubject([]);
   private _categories: String[];
  
-  constructor(private afs: AngularFirestore, private authService: AuthenticateService) {
+  constructor(private afs: AngularFirestore, private authService: AuthenticationService) {
     this.generalCollection = this.afs.collection<Invoice>('general');
     this.invoiceCollection = this.afs.collection<Invoice>('invoices');
     this.fetchCategories();
