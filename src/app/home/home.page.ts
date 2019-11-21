@@ -30,8 +30,6 @@ export class HomePage {
   ngOnInit() {
     if (this.authService.isAuthenticated) {
       this.initializeHome();
-    } else {
-      // this.navCtrl.navigateRoot(['/login']);
     }
   }
 
