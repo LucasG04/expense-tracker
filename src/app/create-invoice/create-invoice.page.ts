@@ -54,22 +54,27 @@ export class CreateInvoicePage implements OnInit {
     return date;
   }
 
+  private getTodayAsISO8601(): string {
+    const today = new Date();
+    return `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+  }
+
 }
 
 const validation_messages = {
   'title': [
-    { type: 'required', message: 'Email is required.' },
+    { type: 'required', message: 'Titel wird benötigt' },
   ],
   'costs': [
-    { type: 'required', message: 'Costs are required.' },
+    { type: 'required', message: 'Rechnungsbetrag wird benötigt' },
   ],
   'category': [
-    { type: 'required', message: 'Category is required.' },
+    { type: 'required', message: 'Kategorie wird benötigt' },
   ],
   'date': [
-    { type: 'required', message: 'Date is required.' },
+    { type: 'required', message: 'Rechnungsdatum wird benötigt' },
   ],
   'note': [
-    { type: 'required', message: 'Note is required.' },
+    { type: 'required', message: 'Notiz wird benötigt' },
   ],
 };
