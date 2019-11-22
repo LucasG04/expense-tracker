@@ -37,14 +37,22 @@ export class HomePage {
   initializeHome() {
     this.userEmail = this.authService.userDetails().uid;
     this.dataService.invoices.subscribe((invoices) => {
-      this.invoices = invoices;
-      this.sortInvoicesByDate();
-      setTimeout(() => this.createPieChart());
-      setTimeout(() => {
-        if (this.invoices)
-          this.simulatedLoading = false;
-      }, 2000);
+      if (invoices) {
+        this.invoices = invoices;
+        this.sortInvoicesByDate();
+        setTimeout(() => this.createPieChart());
+        setTimeout(() => {
+          if (this.invoices)
+            this.simulatedLoading = false;
+        }, 2000);
+      }
     });
+  }
+
+  async doRefresh(event) {
+    await this.dataService.fetchInvoices();
+    await this.dataService.fetchCategories();
+    event.target.complete();
   }
 
   sortInvoicesByDate() {

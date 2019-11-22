@@ -22,11 +22,11 @@ export class DatabaseService {
     this.fetchInvoices();
   }
 
-  private async fetchInvoices() {
+  async fetchInvoices() {
     this._invoices.next(await this.getInvoices())
   }
 
-  private async fetchCategories() {
+  async fetchCategories() {
     this._categories = await this.getCategories();
   }
 

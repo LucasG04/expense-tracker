@@ -12,6 +12,10 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid style="margin-bottom: 50px;">
     <ion-row>
       <ion-col class="ion-text-center">
@@ -34,7 +38,8 @@
               <ion-text color="primary">
                 <h2 class="list-item-title">{{invoice.title}}</h2>
               </ion-text>
-              <h3 class="list-item-text">{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs | germanCosts}} €</h3>
+              <h3 class="list-item-text">{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs | germanCosts}}
+                €</h3>
             </ion-label>
             <ion-button slot="end" fill="clear" color="dark" shape="round"
               (click)="presentPopoverForInvoice(invoice, $event)">
