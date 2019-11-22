@@ -19,6 +19,7 @@ export class EditInvoicePage implements OnInit {
   errorMessage: string = '';
   validation_messages = validation_messages;
   categories = [];
+  saving = false;
 
   dateUtils;
 
@@ -53,7 +54,11 @@ export class EditInvoicePage implements OnInit {
 
   editInvoice(invoice: Invoice) {
     invoice.date = this.dateUtils.ISO8601toDate(invoice.date).getTime().toString();
-    this.dataService.updateInvoice(invoice).subscribe(() => this.navCtrl.back());
+    this.saving = true;
+    this.dataService.updateInvoice(invoice).subscribe(() => {
+      this.saving = false;
+      this.navCtrl.back();
+    });
   }
 
 }

@@ -37,7 +37,7 @@ export class HomePage {
   initializeHome() {
     this.userEmail = this.authService.userDetails().uid;
     this.dataService.invoices.subscribe((invoices) => {
-      if (invoices) {
+      if (invoices.length > 0) {
         this.invoices = invoices;
         this.sortInvoicesByDate();
         setTimeout(() => this.createPieChart());
