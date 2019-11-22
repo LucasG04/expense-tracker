@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, BehaviorSubject } from 'rxjs';
-import { map } from "rxjs/operators";
+import { map, retry } from "rxjs/operators";
 import { Invoice } from '../../models/invoice';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -46,7 +46,8 @@ export class DatabaseService {
           invoice.id = doc.id;
           return invoice as Invoice;
         });
-      })
+      }),
+      retry(2)
     ).toPromise();
   }
  
@@ -74,7 +75,8 @@ export class DatabaseService {
     return this.generalCollection.doc('categories').get().pipe(
       map(snapshot => {
         return snapshot.data().categories;
-      })
+      }),
+      retry(2)
     ).toPromise();
   }
 }
