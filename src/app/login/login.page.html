@@ -36,6 +36,6 @@
         <ion-label color="danger">{{errorMessage}}</ion-label>
     </div>
     
-    <ion-button class="submit-btn" type="submit" size="large" expand="block" [disabled]="!validations_form.valid">Log In</ion-button>
+    <ion-button class="submit-btn" type="submit" size="large" expand="block" [disabled]="!validations_form.valid | loggingIn">Log In</ion-button>
   </form>
 </ion-content>

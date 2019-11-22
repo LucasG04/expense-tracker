@@ -12,6 +12,8 @@ export class LoginPage implements OnInit {
 
   validations_form: FormGroup;
   errorMessage: string = '';
+
+  loggingIn = false;
  
   constructor(
     private navCtrl: NavController,
@@ -46,13 +48,17 @@ export class LoginPage implements OnInit {
  
  
   loginUser(value){
+    this.loggingIn = true;
     this.authService.loginUser(value)
-    .then(res => {
-      this.errorMessage = "";
-      this.navCtrl.navigateForward(['/home']);
-    }, err => {
-      this.errorMessage = err.message;
-    })
+      .then(() => {
+        this.errorMessage = "";
+        this.loggingIn = false;
+        this.navCtrl.navigateForward(['/home']);
+      })
+      .catch(err => {
+        this.errorMessage = err.message;
+        this.loggingIn = false;
+      });
   }
 
 }
