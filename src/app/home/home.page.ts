@@ -56,11 +56,7 @@ export class HomePage {
   logout() {
     this.authService.logoutUser()
       .then(res => {
-        console.log(res);
         this.navCtrl.navigateRoot(['/login']);
-      })
-      .catch(error => {
-        console.log(error);
       });
   }
 
