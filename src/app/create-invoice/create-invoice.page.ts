@@ -3,6 +3,7 @@ import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 import { Invoice } from '../models/invoice';
 import { NavController } from '@ionic/angular';
 import { DatabaseService } from '../services/database/database.service';
+import { DateUtils } from '../utils';
 
 @Component({
   selector: 'app-create-invoice',
@@ -16,6 +17,8 @@ export class CreateInvoicePage implements OnInit {
   validation_messages = validation_messages;
   categories = [];
 
+  dateUtils;
+
   constructor(
     private formBuilder: FormBuilder,
     private navCtrl: NavController,
@@ -23,6 +26,7 @@ export class CreateInvoicePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dateUtils = new DateUtils();
     this.categories = this.dataService.categories;
 
     this.validations_form = this.formBuilder.group({
@@ -43,20 +47,8 @@ export class CreateInvoicePage implements OnInit {
   }
 
   createInvoice(invoice: Invoice) {
-    invoice.date = this.ISO8601toDate(invoice.date).getTime().toString();
+    invoice.date = this.dateUtils.ISO8601toDate(invoice.date).getTime().toString();
     this.dataService.createInvoice(invoice).subscribe(() => this.navCtrl.back());
-  }
-
-  ISO8601toDate(dateStr: string): Date {
-    const parts = dateStr.substring(0,10).split('-');
-    const date = new Date();
-    date.setFullYear(+parts[0], +parts[1]-1, +parts[2]);
-    return date;
-  }
-
-  private getTodayAsISO8601(): string {
-    const today = new Date();
-    return `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
   }
 
 }
