@@ -6,16 +6,62 @@ import { Invoice } from '../models/invoice';
     selector: 'selector-name',
     template: `
     <style>
+    #grid {
+        width: 80%;
+    }
     .section-title {
         //margin: 5px 0 0 10px;
         font-weight: bolder;
     }
+    .label-col {
+        width: 30%;
+    }
     </style>
 
-    <ion-grid>
+    <ion-grid id="grid">
     <ion-row>
       <ion-col>
-        <h2 class="section-title">Historie</h2>
+        <h3 class="section-title">Historie</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        Titel:
+      </ion-col>
+      <ion-col size="8">
+        {{invoice.title}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        Betrag:
+      </ion-col>
+      <ion-col size="8">
+        {{invoice.costs}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        Datum:
+      </ion-col>
+      <ion-col size="8">
+        {{invoice.date}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        Kategorie:
+      </ion-col>
+      <ion-col size="8">
+        {{invoice.category}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        Notiz:
+      </ion-col>
+      <ion-col size="8">
+        {{invoice.note}}
       </ion-col>
     </ion-row>
     <ion-grid>
