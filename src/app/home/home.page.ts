@@ -1,11 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../services/authentication/authentication.service';
-import { NavController, PopoverController } from '@ionic/angular';
+import { NavController, PopoverController, ModalController } from '@ionic/angular';
 import { Invoice } from '../models/invoice';
 import { DatabaseService } from '../services/database/database.service';
 import { PopoverComponent } from './popover.component';
 import { Chart } from 'chart.js';
 import { CATEGORYICONS } from '../entities/category-icons';
+import { InvoiceModalComponent } from './invoice-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,8 @@ export class HomePage {
     private navCtrl: NavController,
     private authService: AuthenticationService,
     private dataService: DatabaseService,
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
+    private modalCtrl: ModalController
   ) { }
 
   @ViewChild('pieCanvas', { static: false }) pieCanvas: ElementRef;
@@ -80,6 +82,16 @@ export class HomePage {
       animated: true,
     });
     return await popvoer.present();
+  }
+
+  async presentInvoiceModal(invoice) {
+    const modal = await this.modalCtrl.create({
+      component: InvoiceModalComponent,
+      componentProps: { invoice },
+      animated: true,
+      cssClass: 'custom-modal-css'
+    });
+    return await modal.present();
   }
 
   navigateToAddInvoice() {
