@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NavParams, NavController, PopoverController } from '@ionic/angular';
+import { NavController, PopoverController } from '@ionic/angular';
 import { DatabaseService } from '../services/database/database.service';
 import { Invoice } from '../models/invoice';
 
 @Component({
-    selector: 'selector-name',
+    selector: 'options-popover',
     template: `
         <ion-list lines="none">
             <ion-item (click)="editInvoice()" detail>
@@ -25,7 +25,8 @@ export class PopoverComponent implements OnInit {
     constructor(
         private navCtrl: NavController,
         private popoverCtrl: PopoverController,
-        private dataService: DatabaseService) { }
+        private dataService: DatabaseService
+    ) { }
 
     ngOnInit() { }
 

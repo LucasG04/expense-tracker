@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NavParams, ModalController, } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Invoice } from '../models/invoice';
 
 @Component({
-    selector: 'selector-name',
-    template: `
+  selector: 'invoice-detail-modal',
+  template: `
     <style>
     #grid {
         width: 80%;
@@ -62,18 +62,18 @@ import { Invoice } from '../models/invoice';
 
 export class InvoiceModalComponent implements OnInit {
 
-    invoiceDate: Date;
+  invoiceDate: Date;
 
-    constructor(
-        private modalCtrl: ModalController
-    ) { }
+  constructor(
+    private modalCtrl: ModalController
+  ) { }
 
-    @Input() invoice: Invoice;
-    ngOnInit() {
-        this.invoiceDate = new Date(+this.invoice.date);
-    }
+  @Input() invoice: Invoice;
+  ngOnInit() {
+    this.invoiceDate = new Date(+this.invoice.date);
+  }
 
-    async dismissModal() {
-        await this.modalCtrl.dismiss();
-    }
+  async dismissModal() {
+    await this.modalCtrl.dismiss();
+  }
 }
