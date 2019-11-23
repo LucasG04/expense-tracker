@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavParams, NavController, PopoverController } from '@ionic/angular';
 import { DatabaseService } from '../services/database/database.service';
+import { Invoice } from '../models/invoice';
 
 @Component({
     selector: 'selector-name',
@@ -20,17 +21,13 @@ import { DatabaseService } from '../services/database/database.service';
 
 export class PopoverComponent implements OnInit {
 
-    invoice;
-
+    @Input() invoice: Invoice;
     constructor(
-        private navParams: NavParams,
         private navCtrl: NavController,
         private popoverCtrl: PopoverController,
         private dataService: DatabaseService) { }
 
-    ngOnInit() {
-        this.invoice = this.navParams.data.invoice;
-    }
+    ngOnInit() { }
 
     editInvoice() {
         this.navCtrl.navigateForward(['/edit-invoice'], { animated: true, state: this.invoice });
