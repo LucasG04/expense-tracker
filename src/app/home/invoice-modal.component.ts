@@ -20,8 +20,13 @@ import { Invoice } from '../models/invoice';
 
     <ion-grid id="grid">
     <ion-row>
-      <ion-col>
+      <ion-col  size="11">
         <h3 class="section-title">{{invoice.title}}</h3>
+      </ion-col>
+      <ion-col size="1" style="margin: auto 0;">
+      <ion-button color="dark" fill="clear" shape="round" size="small" (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
