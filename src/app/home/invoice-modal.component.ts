@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavParams, ModalController, } from '@ionic/angular';
 import { Invoice } from '../models/invoice';
 
@@ -21,15 +21,7 @@ import { Invoice } from '../models/invoice';
     <ion-grid id="grid">
     <ion-row>
       <ion-col>
-        <h3 class="section-title">Historie</h3>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="4">
-        Titel:
-      </ion-col>
-      <ion-col size="8">
-        {{invoice.title}}
+        <h3 class="section-title">{{invoice.title}}</h3>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -37,7 +29,7 @@ import { Invoice } from '../models/invoice';
         Betrag:
       </ion-col>
       <ion-col size="8">
-        {{invoice.costs}}
+        {{invoice.costs | germanCosts}} €
       </ion-col>
     </ion-row>
     <ion-row>
@@ -45,7 +37,7 @@ import { Invoice } from '../models/invoice';
         Datum:
       </ion-col>
       <ion-col size="8">
-        {{invoice.date}}
+        {{invoiceDate.toLocaleDateString()}}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -53,7 +45,7 @@ import { Invoice } from '../models/invoice';
         Kategorie:
       </ion-col>
       <ion-col size="8">
-        {{invoice.category}}
+        {{invoice.category | titlecase }}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -70,15 +62,15 @@ import { Invoice } from '../models/invoice';
 
 export class InvoiceModalComponent implements OnInit {
 
-    invoice: Invoice;
+    invoiceDate: Date;
 
     constructor(
-        private navParams: NavParams,
         private modalCtrl: ModalController
     ) { }
 
+    @Input() invoice: Invoice;
     ngOnInit() {
-        this.invoice = this.navParams.data.invoice;
+        this.invoiceDate = new Date(+this.invoice.date);
     }
 
     async dismissModal() {
