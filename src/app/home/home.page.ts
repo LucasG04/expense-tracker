@@ -46,7 +46,7 @@ export class HomePage {
         setTimeout(() => {
           if (this.invoices)
             this.simulatedLoading = false;
-        }, 2000);
+        }, 1000);
       }
     });
   }
