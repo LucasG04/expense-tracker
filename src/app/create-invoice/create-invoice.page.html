@@ -75,7 +75,7 @@
       <ion-label color="danger">{{errorMessage}}</ion-label>
     </div>
 
-    <ion-button class="submit-btn" type="submit" size="large" expand="full" [disabled]="!validations_form.valid | saving">
+    <ion-button class="submit-btn" type="submit" size="large" expand="full" [disabled]="!validations_form.valid || saving">
       Erstellen</ion-button>
   </form>
 </ion-content>
