@@ -18,6 +18,7 @@ export class HomePage {
 
   userEmail: string;
   invoices: Invoice[];
+  filteredInvoices: Invoice[];
 
   simulatedLoading = true;
 
@@ -42,6 +43,7 @@ export class HomePage {
       if (invoices.length > 0) {
         this.invoices = invoices;
         this.sortInvoicesByDate();
+        this.filteredInvoices = this.invoices;
         setTimeout(() => this.createPieChart());
         setTimeout(() => {
           if (this.invoices)
@@ -109,7 +111,7 @@ export class HomePage {
           datasets: [
             {
               label: "# der Rechnungen",
-              data: this.getNumberOfInvoicesInCategories(),
+              data: this.getValueOfInvoicesInCategories(),
               backgroundColor: [
                 "rgba(40, 45, 76, 0.8)",
                 "rgba(224, 240, 230, 0.8)",
@@ -143,13 +145,26 @@ export class HomePage {
     }
   }
 
-  private getNumberOfInvoicesInCategories(): number[] {
+  private getValueOfInvoicesInCategories(): number[] {
     let result = [];
     this.dataService.categories.forEach(category => {
-      const count = this.invoices.filter(invoice => invoice.category === category).length;
-      result.push(count);
+      const invoices = this.invoices.filter(invoice => invoice.category === category);
+      let moneyValue = 0;
+      invoices.forEach(invoice => moneyValue += invoice.costs);
+      result.push(moneyValue);
     });
     return result;
+  }
+
+  filterInvoices(event) {
+    const chartElements = this.pieChart.getElementsAtEvent(event);
+
+    if (chartElements.length > 0) {
+      const category = this.dataService.categories[chartElements[0]["_index"]];
+      this.filteredInvoices = this.invoices.filter(invoice => invoice.category === category);
+    } else {
+      this.filteredInvoices = this.invoices;
+    }
   }
 
   private getCategoryIconName(category: string): string {
