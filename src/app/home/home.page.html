@@ -3,16 +3,138 @@
     <ion-title>
       Dashboard
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    Hier entsteht ein Dashboard
-  </div>
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid style="margin-bottom: 50px;">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <canvas #pieCanvas (click)="filterInvoices($event)"></canvas>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2 class="section-title">Historie</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center" *ngIf="!simulatedLoading">
+        <ion-list>
+          <ion-item *ngFor="let invoice of filteredInvoices" (click)="presentInvoiceModal(invoice);">
+            <ion-avatar slot="start">
+              <img src="{{getCategoryIconName(invoice.category)}}">
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">{{invoice.title}}</h2>
+              </ion-text>
+              <h3 class="list-item-text">{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs | germanCosts}}
+                €</h3>
+            </ion-label>
+            <ion-button slot="end" fill="clear" color="dark" shape="round"
+              (click)="$event.preventDefault(); $event.stopPropagation(); presentPopoverForInvoice(invoice, $event);">
+              <ion-icon slot="icon-only" name="more"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <!-- Skeleton List -->
+      <ion-col class="ion-text-center" *ngIf="simulatedLoading">
+        <ion-list>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <h3 style="display: flex;" class="list-item-text">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </h3>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <h3 style="display: flex;" class="list-item-text">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </h3>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <h3 style="display: flex;" class="list-item-text">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </h3>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <h3 style="display: flex;" class="list-item-text">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </h3>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="primary">
+                <h2 class="list-item-title">
+                  <ion-skeleton-text animated style="width: 100px; height: 20px;"></ion-skeleton-text>
+                </h2>
+              </ion-text>
+              <h3 style="display: flex;" class="list-item-text">
+                <ion-skeleton-text animated style="width: 160px; height: 18px; margin-right: 10px;"></ion-skeleton-text>
+              </h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <!-- Skeleton List -->
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add" (click)="navigateToAddInvoice()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
