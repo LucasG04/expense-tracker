@@ -16,11 +16,16 @@ import { Invoice } from '../models/invoice';
     .label-col {
         width: 30%;
     }
+    #note-col {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-height: 80px;
+    }
     </style>
 
     <ion-grid id="grid">
     <ion-row>
-      <ion-col  size="11">
+      <ion-col size="11">
         <h3 class="section-title">{{invoice.title}}</h3>
       </ion-col>
       <ion-col size="1" style="margin: auto 0;">
@@ -57,7 +62,7 @@ import { Invoice } from '../models/invoice';
       <ion-col size="4">
         Notiz:
       </ion-col>
-      <ion-col size="8">
+      <ion-col size="8" id="note-col">
         {{invoice.note}}
       </ion-col>
     </ion-row>
