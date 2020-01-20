@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../services/authentication/authentication.service';
-import { NavController, PopoverController, ModalController } from '@ionic/angular';
+import { NavController, PopoverController, ModalController, ToastController } from '@ionic/angular';
 import { Invoice } from '../models/invoice';
 import { DatabaseService } from '../services/database/database.service';
 import { PopoverComponent } from './popover.component';
@@ -27,7 +27,8 @@ export class HomePage {
     private authService: AuthenticationService,
     private dataService: DatabaseService,
     private popoverCtrl: PopoverController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private toastCtrl: ToastController,
   ) { }
 
   @ViewChild('pieCanvas', { static: false }) pieCanvas: ElementRef;
@@ -49,6 +50,7 @@ export class HomePage {
           if (this.invoices)
             this.simulatedLoading = false;
         }, 1000);
+        this.checkBudget();
       }
     });
   }
@@ -167,8 +169,24 @@ export class HomePage {
     }
   }
 
-  private getCategoryIconName(category: string): string {
+  private getCategoryIcon(category: string): string {
     return CATEGORYICONS.find(element => element.category == category).icon;
+  }
+
+  private async checkBudget() {
+    const budget = await this.dataService.getBudget();
+    let spentAmount = 0;
+    this.invoices.forEach(inv => spentAmount = spentAmount + inv.costs);
+
+    if (budget < spentAmount) {
+      const toast = this.toastCtrl.create({
+        message: `Sie sind ${Math.round((spentAmount - budget) * 100) / 100}€ über dem Budget. Ihr Vorgesetzter wurde benachrichtigt.`,
+        duration: 5000,
+        showCloseButton: true,
+        closeButtonText: 'Okay',
+      });
+      (await toast).present();
+    }
   }
 
 }

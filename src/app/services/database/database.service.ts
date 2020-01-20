@@ -79,4 +79,9 @@ export class DatabaseService {
       retry(2)
     ).toPromise();
   }
+
+  getBudget(): Promise<number> {
+    // TODO: get budget for specific user
+    return new Promise((res, rej) => res(500));
+  }
 }
