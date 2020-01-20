@@ -32,7 +32,8 @@
         <ion-list>
           <ion-item *ngFor="let invoice of filteredInvoices" (click)="presentInvoiceModal(invoice);">
             <ion-avatar slot="start">
-              <img src="{{getCategoryIconPath(invoice.category)}}">
+              <!-- <img src="{{getCategoryIconPath(invoice.category)}}"> -->
+              <ion-icon name="{{getCategoryIcon(invoice.category)}}" size="large"></ion-icon>
             </ion-avatar>
             <ion-label>
               <ion-text color="primary">
