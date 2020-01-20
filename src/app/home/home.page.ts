@@ -182,6 +182,8 @@ export class HomePage {
       const toast = this.toastCtrl.create({
         message: `Sie sind ${Math.round((spentAmount - budget) * 100) / 100}€ über dem Budget. Ihr Vorgesetzter wurde benachrichtigt.`,
         duration: 5000,
+        showCloseButton: true,
+        closeButtonText: 'Okay',
       });
       (await toast).present();
     }
