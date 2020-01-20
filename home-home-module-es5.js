@@ -33773,7 +33773,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Dashboard\r\n    </ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"exit\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <ion-grid style=\"margin-bottom: 50px;\">\r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <canvas #pieCanvas (click)=\"filterInvoices($event)\"></canvas>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n        <h2 class=\"section-title\">Historie</h2>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\" *ngIf=\"!simulatedLoading\">\r\n        <ion-list>\r\n          <ion-item *ngFor=\"let invoice of filteredInvoices\" (click)=\"presentInvoiceModal(invoice);\">\r\n            <ion-avatar slot=\"start\">\r\n              <img src=\"{{getCategoryIconName(invoice.category)}}\">\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">{{invoice.title}}</h2>\r\n              </ion-text>\r\n              <h3 class=\"list-item-text\">{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs | germanCosts}}\r\n                €</h3>\r\n            </ion-label>\r\n            <ion-button slot=\"end\" fill=\"clear\" color=\"dark\" shape=\"round\"\r\n              (click)=\"$event.preventDefault(); $event.stopPropagation(); presentPopoverForInvoice(invoice, $event);\">\r\n              <ion-icon slot=\"icon-only\" name=\"more\"></ion-icon>\r\n            </ion-button>\r\n          </ion-item>\r\n        </ion-list>\r\n      </ion-col>\r\n      <!-- Skeleton List -->\r\n      <ion-col class=\"ion-text-center\" *ngIf=\"simulatedLoading\">\r\n        <ion-list>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n        </ion-list>\r\n      </ion-col>\r\n      <!-- Skeleton List -->\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"add\" (click)=\"navigateToAddInvoice()\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Dashboard\r\n    </ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"exit\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <ion-grid style=\"margin-bottom: 50px;\">\r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <canvas #pieCanvas (click)=\"filterInvoices($event)\"></canvas>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n        <h2 class=\"section-title\">Historie</h2>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\" *ngIf=\"!simulatedLoading\">\r\n        <ion-list>\r\n          <ion-item *ngFor=\"let invoice of filteredInvoices\" (click)=\"presentInvoiceModal(invoice);\">\r\n            <ion-avatar slot=\"start\">\r\n              <img src=\"{{getCategoryIconPath(invoice.category)}}\">\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">{{invoice.title}}</h2>\r\n              </ion-text>\r\n              <h3 class=\"list-item-text\">{{getLocaleDateByMilliseconds(invoice.date)}} | {{invoice.costs | germanCosts}}\r\n                €</h3>\r\n            </ion-label>\r\n            <ion-button slot=\"end\" fill=\"clear\" color=\"dark\" shape=\"round\"\r\n              (click)=\"$event.preventDefault(); $event.stopPropagation(); presentPopoverForInvoice(invoice, $event);\">\r\n              <ion-icon slot=\"icon-only\" name=\"more\"></ion-icon>\r\n            </ion-button>\r\n          </ion-item>\r\n        </ion-list>\r\n      </ion-col>\r\n      <!-- Skeleton List -->\r\n      <ion-col class=\"ion-text-center\" *ngIf=\"simulatedLoading\">\r\n        <ion-list>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n          <ion-item>\r\n            <ion-avatar slot=\"start\">\r\n              <ion-skeleton-text animated></ion-skeleton-text>\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <ion-text color=\"primary\">\r\n                <h2 class=\"list-item-title\">\r\n                  <ion-skeleton-text animated style=\"width: 100px; height: 20px;\"></ion-skeleton-text>\r\n                </h2>\r\n              </ion-text>\r\n              <h3 style=\"display: flex;\" class=\"list-item-text\">\r\n                <ion-skeleton-text animated style=\"width: 160px; height: 18px; margin-right: 10px;\"></ion-skeleton-text>\r\n              </h3>\r\n            </ion-label>\r\n          </ion-item>\r\n        </ion-list>\r\n      </ion-col>\r\n      <!-- Skeleton List -->\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"add\" (click)=\"navigateToAddInvoice()\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n</ion-content>"
 
 /***/ }),
 
@@ -33981,12 +33981,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, authService, dataService, popoverCtrl, modalCtrl) {
+    function HomePage(navCtrl, authService, dataService, popoverCtrl, modalCtrl, toastCtrl) {
         this.navCtrl = navCtrl;
         this.authService = authService;
         this.dataService = dataService;
         this.popoverCtrl = popoverCtrl;
         this.modalCtrl = modalCtrl;
+        this.toastCtrl = toastCtrl;
         this.simulatedLoading = true;
     }
     HomePage.prototype.ngOnInit = function () {
@@ -34007,6 +34008,7 @@ var HomePage = /** @class */ (function () {
                     if (_this.invoices)
                         _this.simulatedLoading = false;
                 }, 1000);
+                _this.checkBudget();
             }
         });
     };
@@ -34147,15 +34149,42 @@ var HomePage = /** @class */ (function () {
             this.filteredInvoices = this.invoices;
         }
     };
-    HomePage.prototype.getCategoryIconName = function (category) {
+    HomePage.prototype.getCategoryIconPath = function (category) {
         return _entities_category_icons__WEBPACK_IMPORTED_MODULE_7__["CATEGORYICONS"].find(function (element) { return element.category == category; }).icon;
+    };
+    HomePage.prototype.checkBudget = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var budget, spentAmount, toast;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.dataService.getBudget()];
+                    case 1:
+                        budget = _a.sent();
+                        spentAmount = 0;
+                        this.invoices.forEach(function (inv) { return spentAmount = spentAmount + inv.costs; });
+                        if (!(budget < spentAmount)) return [3 /*break*/, 3];
+                        toast = this.toastCtrl.create({
+                            message: "Sie sind " + Math.round((spentAmount - budget) * 100) / 100 + "\u20AC \u00FCber dem Budget. Ihr Vorgesetzter wurde benachrichtigt.",
+                            duration: 5000,
+                            showCloseButton: true,
+                            closeButtonText: 'Okay',
+                        });
+                        return [4 /*yield*/, toast];
+                    case 2:
+                        (_a.sent()).present();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     };
     HomePage.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
         { type: _services_authentication_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"] },
         { type: _services_database_database_service__WEBPACK_IMPORTED_MODULE_4__["DatabaseService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["PopoverController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('pieCanvas', { static: false }),
@@ -34171,7 +34200,8 @@ var HomePage = /** @class */ (function () {
             _services_authentication_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"],
             _services_database_database_service__WEBPACK_IMPORTED_MODULE_4__["DatabaseService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["PopoverController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])
     ], HomePage);
     return HomePage;
 }());

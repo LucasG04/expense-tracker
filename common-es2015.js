@@ -759,6 +759,10 @@ let DatabaseService = class DatabaseService {
             return snapshot.data().categories;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2)).toPromise();
     }
+    getBudget() {
+        // TODO: get budget for specific user
+        return new Promise((res, rej) => res(500));
+    }
 };
 DatabaseService.ctorParameters = () => [
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"] },

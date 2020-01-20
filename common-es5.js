@@ -513,6 +513,10 @@ var DatabaseService = /** @class */ (function () {
             return snapshot.data().categories;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2)).toPromise();
     };
+    DatabaseService.prototype.getBudget = function () {
+        // TODO: get budget for specific user
+        return new Promise(function (res, rej) { return res(500); });
+    };
     DatabaseService.ctorParameters = function () { return [
         { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"] },
         { type: _authentication_authentication_service__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"] }
