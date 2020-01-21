@@ -169,7 +169,7 @@ export class HomePage {
     }
   }
 
-  private getCategoryIcon(category: string): string {
+  getCategoryIcon(category: string): string {
     return CATEGORYICONS.find(element => element.category == category).icon;
   }
 
