@@ -3,11 +3,11 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "Expense Tracker",
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.ico",
+          "/assets/icon/favicon.png",
           "/index.html",
           "/*.css",
           "/*.js"
