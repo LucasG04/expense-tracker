@@ -10,13 +10,13 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
-        with:
-          node-version: '10.x'
-      - uses: coturiv/setup-ionic@v1
-        with:
-          cordova-version: 8
+    - uses: actions/checkout@v1
+    - name: Install @angular/cli
+      run: npm i -D -E @angular/cli
+    - name: Use coturiv/setup-ionic
+      uses: coturiv/setup-ionic@v1
+      with:
+        cordova-version: 8
       - run: npm install
       - name: Build App
         run: npm run build
