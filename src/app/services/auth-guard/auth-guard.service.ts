@@ -10,7 +10,7 @@ export class AuthGuardService {
   constructor(
     public authenticationService: AuthenticationService,
     private navCtrl: NavController,
-      ) {}
+  ) { }
 
   canActivate(): boolean {
     if (!this.authenticationService.isAuthenticated) {

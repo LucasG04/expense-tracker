@@ -6,16 +6,17 @@ export class AuthenticationService {
 
   constructor() { }
 
-  registerUser(value) {
+  registerUser(value: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
         .then(
           res => resolve(res),
-          err => reject(err))
-    })
+          err => reject(err)
+        );
+    });
   }
 
-  loginUser(value) {
+  loginUser(value: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(
@@ -25,20 +26,18 @@ export class AuthenticationService {
     });
   }
 
-  logoutUser() {
+  logoutUser(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         firebase.auth().signOut()
           .then(() => {
             resolve();
-          }).catch((error) => {
-            reject();
-          });
+          }).catch(() => reject());
       }
     })
   }
 
-  userDetails() {
+  userDetails(): firebase.User {
     return firebase.auth().currentUser;
   }
 
