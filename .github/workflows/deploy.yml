@@ -19,7 +19,7 @@ jobs:
         cordova-version: 8
     - run: npm install
     - name: Build App
-      run: ionic build --prod
+      run: ionic build
     - name: Deploy to Firebase
       uses: w9jds/firebase-action@v1.5.0
       with:
