@@ -10,13 +10,12 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Install Angular and Ionic
-        run: npm install -g @angular/cli @ionic/cli
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - name: Build App
         run: npm run build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@v1.5.0
