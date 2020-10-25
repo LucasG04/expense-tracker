@@ -1,1 +1,1 @@
-rm -f src/environments/environment.prod.ts
+rm -f src/environments/firebase_config.ts
