@@ -1,0 +1,1 @@
+rm -f src/environments/firebase_config.ts

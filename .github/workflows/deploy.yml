@@ -1,0 +1,31 @@
+name: Build Angular App and Deploy on Firebase
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install @angular/cli
+      run: npm i -D -E @angular/cli
+    - name: Use coturiv/setup-ionic
+      uses: coturiv/setup-ionic@v1
+      with:
+        cordova-version: 8
+    - run: npm install
+    - name: Decrypt environment file
+      run: sh ./scripts/decrypt_prod_file.sh ${{ secrets.PROD_DECRYPTION_KEY }}
+    - name: Build App
+      run: ionic build --prod
+    - name: Deploy to Firebase
+      uses: w9jds/firebase-action@v1.5.0
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+    - name: Clean up
+      run: sh ./scripts/clean_up_deploy.sh

@@ -25,10 +25,11 @@ npm-debug.log*
 /.vscode
 /coverage
 /dist
-/src/environments/environment.prod.ts
-/src/environments/environment.ts
+#/src/environments/environment.prod.ts
+#/src/environments/environment.ts
 /node_modules
 /platforms
 /plugins
 /www
 /.firebase/hosting.*.cache
+firebase_config.ts
