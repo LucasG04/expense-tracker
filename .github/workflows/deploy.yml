@@ -18,6 +18,8 @@ jobs:
       with:
         cordova-version: 8
     - run: npm install
+    - name: Decrypt environmet file
+      run: sh ./scripts/decrypt_prod_file.sh ${{ secrets.PROD_DECRYPTION_KEY }}
     - name: Build App
       run: ionic build
     - name: Deploy to Firebase
@@ -26,3 +28,5 @@ jobs:
         args: deploy --only hosting
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+    - name: Clean up
+      run: sh ./scripts/clean_up_deploy.sh

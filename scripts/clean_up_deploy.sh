@@ -1,0 +1,1 @@
+rm -f src/environments/environment.prod.ts
