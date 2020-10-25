@@ -21,7 +21,7 @@ jobs:
     - name: Decrypt environment file
       run: sh ./scripts/decrypt_prod_file.sh ${{ secrets.PROD_DECRYPTION_KEY }}
     - name: Build App
-      run: ionic build
+      run: ionic build --prod
     - name: Deploy to Firebase
       uses: w9jds/firebase-action@v1.5.0
       with:

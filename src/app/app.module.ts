@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment.prod';
+
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -18,6 +18,7 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 import * as firebase from 'firebase/app';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
 firebase.initializeApp(environment.firebase);
 
@@ -25,13 +26,13 @@ firebase.initializeApp(environment.firebase);
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
-    ReactiveFormsModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    ReactiveFormsModule,
+    IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
