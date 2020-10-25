@@ -18,7 +18,7 @@ jobs:
       with:
         cordova-version: 8
     - run: npm install
-    - name: Decrypt environmet file
+    - name: Decrypt environment file
       run: sh ./scripts/decrypt_prod_file.sh ${{ secrets.PROD_DECRYPTION_KEY }}
     - name: Build App
       run: ionic build

@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment.prod';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
