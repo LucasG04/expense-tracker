@@ -1,2 +1,2 @@
 # expense-tracker
-This app was developed for my Backelor of Science in the course Software Engineering. It is designed to monitor and document expenses during business trips. 
+This app is designed to monitor and document expenses incurred during business trips. It was developed as part of my Bachelor of Science degree in the Software Engineering course.
